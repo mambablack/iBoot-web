@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.mapping.SysParamDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.model.SysParamDetail" >
+    <id column="P_KEY" property="pKey" jdbcType="VARCHAR" />
+    <id column="P_VALUE" property="pValue" jdbcType="VARCHAR" />
+    <result column="P_DESC" property="pDesc" jdbcType="VARCHAR" />
+    <result column="P_P_VALUE" property="pPValue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    P_KEY, P_VALUE, P_DESC, P_P_VALUE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.model.SysParamDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_param_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ai.model.SysParamDetailKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_param_detail
+    where P_KEY = #{pKey,jdbcType=VARCHAR}
+      and P_VALUE = #{pValue,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ai.model.SysParamDetailKey" >
+    delete from sys_param_detail
+    where P_KEY = #{pKey,jdbcType=VARCHAR}
+      and P_VALUE = #{pValue,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.model.SysParamDetailExample" >
+    delete from sys_param_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.model.SysParamDetail" >
+    insert into sys_param_detail (P_KEY, P_VALUE, P_DESC, 
+      P_P_VALUE)
+    values (#{pKey,jdbcType=VARCHAR}, #{pValue,jdbcType=VARCHAR}, #{pDesc,jdbcType=VARCHAR}, 
+      #{pPValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.model.SysParamDetail" >
+    insert into sys_param_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pKey != null" >
+        P_KEY,
+      </if>
+      <if test="pValue != null" >
+        P_VALUE,
+      </if>
+      <if test="pDesc != null" >
+        P_DESC,
+      </if>
+      <if test="pPValue != null" >
+        P_P_VALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pKey != null" >
+        #{pKey,jdbcType=VARCHAR},
+      </if>
+      <if test="pValue != null" >
+        #{pValue,jdbcType=VARCHAR},
+      </if>
+      <if test="pDesc != null" >
+        #{pDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="pPValue != null" >
+        #{pPValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.model.SysParamDetailExample" resultType="java.lang.Integer" >
+    select count(*) from sys_param_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_param_detail
+    <set >
+      <if test="record.pKey != null" >
+        P_KEY = #{record.pKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pValue != null" >
+        P_VALUE = #{record.pValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pDesc != null" >
+        P_DESC = #{record.pDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pPValue != null" >
+        P_P_VALUE = #{record.pPValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_param_detail
+    set P_KEY = #{record.pKey,jdbcType=VARCHAR},
+      P_VALUE = #{record.pValue,jdbcType=VARCHAR},
+      P_DESC = #{record.pDesc,jdbcType=VARCHAR},
+      P_P_VALUE = #{record.pPValue,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.model.SysParamDetail" >
+    update sys_param_detail
+    <set >
+      <if test="pDesc != null" >
+        P_DESC = #{pDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="pPValue != null" >
+        P_P_VALUE = #{pPValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where P_KEY = #{pKey,jdbcType=VARCHAR}
+      and P_VALUE = #{pValue,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.model.SysParamDetail" >
+    update sys_param_detail
+    set P_DESC = #{pDesc,jdbcType=VARCHAR},
+      P_P_VALUE = #{pPValue,jdbcType=VARCHAR}
+    where P_KEY = #{pKey,jdbcType=VARCHAR}
+      and P_VALUE = #{pValue,jdbcType=VARCHAR}
+  </update>
+</mapper>

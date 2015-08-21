@@ -1,7 +1,7 @@
 /*选择框*/
 $(document).ready(function(e){
-	$(".select option").click(function(){
-		$(this).parent().siblings("input").val($(this).val())
+	$(".select").change(function(){
+		$(this).siblings("input").val($(this).val())
 	})
 })
 

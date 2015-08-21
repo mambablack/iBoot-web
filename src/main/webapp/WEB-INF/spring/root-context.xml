@@ -15,9 +15,12 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	<aop:aspectj-autoproxy />
 
 	<bean id="timingAspect" class="org.perf4j.log4j.aop.TimingAspect" />
+
 
 	<import resource="classpath:applicationContext-druid2.xml" />
 	<!-- <import resource="classpath:applicationContext-redis.xml" /> -->
